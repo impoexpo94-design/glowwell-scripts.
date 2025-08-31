@@ -2,51 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BMI Calculator</title>
   <style>
-    body {font-family: Arial, sans-serif; background: #f9f9f9; padding: 40px; text-align: center;}
-    .box {max-width: 400px; margin: auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
-    h2 {margin-bottom: 20px;}
-    label {display: block; margin: 10px 0 5px;}
-    input {width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;}
-    button {margin-top: 15px; padding: 10px; width: 100%; background: #4CAF50; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;}
-    button:hover {background: #45a049;}
-    .result {margin-top: 15px; padding: 10px; background: #f0fdf4; border: 1px dashed #8bc34a; border-radius: 8px;}
+    body { font-family: Arial, sans-serif; background:#f7f7f7; margin:0; padding:20px; }
+    .gw-wrap { display:flex; justify-content:center; align-items:center; min-height:90vh; }
+    .gw-card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px; }
+    h3 { margin-bottom:10px; text-align:center; }
+    .gw-help { font-size:14px; color:#555; margin-bottom:15px; text-align:center; }
+    label { display:block; margin-top:10px; font-weight:bold; }
+    input { width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px; }
+    button { margin-top:15px; width:100%; padding:10px; background:#0077cc; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
+    button:hover { background:#005fa3; }
+    .gw-result { margin-top:15px; font-weight:bold; text-align:center; }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>BMI Calculator</h2>
-    <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" placeholder="e.g. 70">
+  <div class="gw-wrap">
+    <div class="gw-card">
+      <h3>BMI Calculator</h3>
+      <p class="gw-help">Check your Body Mass Index and weight category.</p>
 
-    <label for="height">Height (cm):</label>
-    <input type="number" id="height" placeholder="e.g. 170">
+      <label for="bmiWeight">Weight (kg)</label>
+      <input type="number" id="bmiWeight" placeholder="Enter your weight">
 
-    <button onclick="calcBMI()">Calculate BMI</button>
+      <label for="bmiHeight">Height (cm)</label>
+      <input type="number" id="bmiHeight" placeholder="Enter your height">
 
-    <div class="result" id="output"></div>
+      <button onclick="calcBMI()">Calculate</button>
+      <div class="gw-result" id="bmiOut"></div>
+    </div>
   </div>
 
-  <script>
-    function calcBMI() {
-      let w = parseFloat(document.getElementById('weight').value);
-      let h = parseFloat(document.getElementById('height').value) / 100; // convert cm to m
-      if (!w || !h) {
-        document.getElementById('output').innerHTML = "⚠️ Please enter valid numbers.";
-        return;
-      }
-      let bmi = (w / (h * h)).toFixed(2);
-      let category = "";
-      if (bmi < 18.5) category = "Underweight";
-      else if (bmi < 24.9) category = "Normal weight";
-      else if (bmi < 29.9) category = "Overweight";
-      else category = "Obesity";
-
-      document.getElementById('output').innerHTML = 
-        "✅ Your BMI is <b>" + bmi + "</b> (" + category + ")";
-    }
-  </script>
+  <script src="bmi.js"></script>
 </body>
 </html>
+
