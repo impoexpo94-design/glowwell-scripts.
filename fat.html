@@ -2,106 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Body Fat Calculator</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .calc-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 300px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      background: #4CAF50;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background: #45a049;
-    }
-    .result {
-      margin-top: 15px;
-      font-weight: bold;
-      text-align: center;
-    }
+    body { font-family: Arial, sans-serif; background:#f7f7f7; margin:0; padding:20px; }
+    .gw-wrap { display:flex; justify-content:center; align-items:center; min-height:90vh; }
+    .gw-card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px; }
+    h3 { margin-bottom:10px; text-align:center; }
+    .gw-help { font-size:14px; color:#555; margin-bottom:15px; text-align:center; }
+    label { display:block; margin-top:10px; font-weight:bold; }
+    input, select { width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px; }
+    button { margin-top:15px; width:100%; padding:10px; background:#0077cc; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
+    button:hover { background:#005fa3; }
+    .gw-result { margin-top:15px; font-weight:bold; text-align:center; }
   </style>
 </head>
 <body>
-  <div class="calc-box">
-    <h2>Body Fat Calculator</h2>
-    <label>Gender</label>
-    <select id="gender">
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
+  <div class="gw-wrap">
+    <div class="gw-card">
+      <h3>Body Fat Calculator</h3>
+      <p class="gw-help">Estimate your body fat percentage using weight and waist size.</p>
 
-    <label>Waist (cm)</label>
-    <input type="number" id="waist">
+      <label for="fatWeight">Weight (kg)</label>
+      <input type="number" id="fatWeight">
 
-    <label>Neck (cm)</label>
-    <input type="number" id="neck">
+      <label for="fatWaist">Waist (cm)</label>
+      <input type="number" id="fatWaist">
 
-    <label>Height (cm)</label>
-    <input type="number" id="height">
+      <label for="fatGender">Gender</label>
+      <select id="fatGender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
 
-    <label>Hip (cm, females only)</label>
-    <input type="number" id="hip">
-
-    <button onclick="calcFat()">Calculate</button>
-    <div class="result" id="fatOut"></div>
+      <button onclick="calcFat()">Calculate</button>
+      <div class="gw-result" id="fatOut"></div>
+    </div>
   </div>
 
-  <script>
-    function calcFat() {
-      let gender = document.getElementById("gender").value;
-      let waist = parseFloat(document.getElementById("waist").value);
-      let neck = parseFloat(document.getElementById("neck").value);
-      let height = parseFloat(document.getElementById("height").value);
-      let hip = parseFloat(document.getElementById("hip").value);
-
-      if (!waist || !neck || !height || (gender === "female" && !hip)) {
-        document.getElementById("fatOut").innerHTML = "⚠ Please fill all required fields.";
-        return;
-      }
-
-      let bodyFat;
-      if (gender === "male") {
-        bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) 
-                         + 0.15456 * Math.log10(height)) - 450;
-      } else {
-        bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) 
-                         + 0.22100 * Math.log10(height)) - 450;
-      }
-
-      document.getElementById("fatOut").innerHTML =
-        "Your Body Fat is <b>" + bodyFat.toFixed(1) + "%</b>";
-    }
-  </script>
+  <script src="fat.js"></script>
 </body>
 </html>
