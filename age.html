@@ -4,17 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Age Calculator</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="age.js" defer></script>
+  <style>
+    .gw-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .gw-card {
+      border: 1px solid #e6e6e6;
+      border-radius: 14px;
+      padding: 18px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      margin-top: 30px;
+    }
+    .gw-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.25rem;
+    }
+    .gw-help {
+      font-size: .9rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    label {
+      font-size: .9rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    button {
+      cursor: pointer;
+      border: 0;
+      background: #4CAF50;
+      color: #fff;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    button:hover {
+      filter: brightness(.95);
+    }
+    .gw-result {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f7fbf8;
+      border: 1px dashed #cfe9d4;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="gw-card">
-    <h3>Age Calculator</h3>
-    <p class="gw-help">Enter your date of birth:</p>
-    <input type="date" id="dob">
-    <br><br>
-    <button onclick="calcAge()">Calculate Age</button>
-    <div class="gw-result" id="ageOut"></div>
+  <div class="gw-wrap">
+    <div class="gw-card" id="ageCard">
+      <h3>Age Calculator</h3>
+      <p class="gw-help">Enter your date of birth to calculate your exact age.</p>
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob">
+      <button onclick="calcAge()">Calculate Age</button>
+      <div class="gw-result" id="ageOut"></div>
+    </div>
   </div>
+
+  <script>
+    function calcAge() {
+      const dob = document.getElementById("dob").value;
+      if (!dob) {
+        document.getElementById("ageOut").innerHTML = "⚠ Please select your date of birth.";
+        return;
+      }
+      const birthDate = new Date(dob);
+      const today = new Date();
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById("ageOut").innerHTML =
+        `🎂 Your age is ${years} years, ${months} months, and ${days} days.`;
+    }
+  </script>
 </body>
 </html>
