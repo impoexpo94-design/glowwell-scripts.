@@ -2,112 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calories Calculator</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .calc-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 300px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      background: #4CAF50;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background: #45a049;
-    }
-    .result {
-      margin-top: 15px;
-      font-weight: bold;
-      text-align: center;
-    }
+    body { font-family: Arial, sans-serif; background:#f7f7f7; margin:0; padding:20px; }
+    .gw-wrap { display:flex; justify-content:center; align-items:center; min-height:90vh; }
+    .gw-card { background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px; }
+    h3 { margin-bottom:10px; text-align:center; }
+    .gw-help { font-size:14px; color:#555; margin-bottom:15px; text-align:center; }
+    label { display:block; margin-top:10px; font-weight:bold; }
+    select, input { width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px; }
+    button { margin-top:15px; width:100%; padding:10px; background:#0077cc; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:16px; }
+    button:hover { background:#005fa3; }
+    .gw-result { margin-top:15px; font-weight:bold; text-align:center; }
   </style>
 </head>
 <body>
-  <div class="calc-box">
-    <h2>Calories Calculator</h2>
-    <label>Age (years)</label>
-    <input type="number" id="age">
+  <div class="gw-wrap">
+    <div class="gw-card">
+      <h3>Calories Calculator</h3>
+      <p class="gw-help">Estimate your daily calorie needs to maintain weight.</p>
 
-    <label>Gender</label>
-    <select id="gender">
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
+      <label for="calWeight">Weight (kg)</label>
+      <input type="number" id="calWeight">
 
-    <label>Weight (kg)</label>
-    <input type="number" id="weight">
+      <label for="calHeight">Height (cm)</label>
+      <input type="number" id="calHeight">
 
-    <label>Height (cm)</label>
-    <input type="number" id="height">
+      <label for="calAge">Age (years)</label>
+      <input type="number" id="calAge">
 
-    <label>Activity Level</label>
-    <select id="activity">
-      <option value="1.2">Sedentary</option>
-      <option value="1.375">Lightly Active</option>
-      <option value="1.55">Moderately Active</option>
-      <option value="1.725">Very Active</option>
-      <option value="1.9">Extra Active</option>
-    </select>
+      <label for="calGender">Gender</label>
+      <select id="calGender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
 
-    <button onclick="calcCalories()">Calculate</button>
-    <div class="result" id="calOut"></div>
+      <label for="calActivity">Activity Level</label>
+      <select id="calActivity">
+        <option value="1.2">Sedentary</option>
+        <option value="1.375">Lightly active</option>
+        <option value="1.55">Moderately active</option>
+        <option value="1.725">Very active</option>
+      </select>
+
+      <button onclick="calcCalories()">Calculate</button>
+      <div class="gw-result" id="calOut"></div>
+    </div>
   </div>
 
-  <script>
-    function calcCalories() {
-      let age = parseInt(document.getElementById("age").value);
-      let gender = document.getElementById("gender").value;
-      let weight = parseFloat(document.getElementById("weight").value);
-      let height = parseFloat(document.getElementById("height").value);
-      let activity = parseFloat(document.getElementById("activity").value);
-
-      if (!age || !weight || !height) {
-        document.getElementById("calOut").innerHTML = "⚠ Please fill all fields.";
-        return;
-      }
-
-      let bmr;
-      if (gender === "male") {
-        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-      } else {
-        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-      }
-
-      let calories = bmr * activity;
-
-      document.getElementById("calOut").innerHTML =
-        "You need about <b>" + Math.round(calories) + " calories/day</b>.";
-    }
-  </script>
+  <script src="calories.js"></script>
 </body>
 </html>
