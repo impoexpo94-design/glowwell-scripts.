@@ -4,26 +4,24 @@
   <meta charset="UTF-8">
   <title>BMI Calculator</title>
   <link rel="stylesheet" href="style.css">
-
+  <script src="bmi.js" defer></script>
 </head>
 <body>
   <div class="gw-wrap">
     <div class="gw-card">
       <h3>BMI Calculator</h3>
-      <p class="gw-help">Check your Body Mass Index and weight category.</p>
+      <p class="gw-help">Enter your weight and height to calculate your Body Mass Index.</p>
 
       <label for="bmiWeight">Weight (kg)</label>
-      <input type="number" id="bmiWeight" placeholder="Enter your weight">
+      <input type="number" id="bmiWeight" placeholder="e.g. 70">
 
       <label for="bmiHeight">Height (cm)</label>
-      <input type="number" id="bmiHeight" placeholder="Enter your height">
+      <input type="number" id="bmiHeight" placeholder="e.g. 170">
 
       <button onclick="calcBMI()">Calculate</button>
-      <div class="gw-result" id="bmiOut"></div>
+
+      <div id="bmiOut" class="gw-result"></div>
     </div>
   </div>
-
-  <script src="bmi.js"></script>
 </body>
 </html>
-
