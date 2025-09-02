@@ -58,7 +58,7 @@
       color: #444;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -68,7 +68,7 @@
       transition: border 0.2s;
     }
 
-    input:focus, select:focus {
+    input:focus {
       border-color: #0077cc;
       outline: none;
     }
@@ -105,23 +105,25 @@
       font-size: 15px;
     }
   </style>
+  <script src="bmi.js" defer></script>
 </head>
 <body>
   <div class="gw-wrap">
     <div class="gw-card">
       <h3>BMI Calculator</h3>
       <p class="gw-help">Enter your weight and height</p>
-      <label for="bmiWeight">Weight (kg)</label>
+
+      <label for="bmiWeight">Weight (kg):</label>
       <input type="number" id="bmiWeight" placeholder="e.g. 70">
 
-      <label for="bmiHeight">Height (cm)</label>
+      <label for="bmiHeight">Height (cm):</label>
       <input type="number" id="bmiHeight" placeholder="e.g. 170">
 
       <button onclick="calcBMI()">Calculate BMI</button>
-      <div class="gw-result" id="bmiOut"></div>
+
+      <div id="bmiOut" class="gw-result"></div>
     </div>
   </div>
-
-  <script src="bmi.js"></script>
 </body>
 </html>
+
