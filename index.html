@@ -303,13 +303,22 @@
 <body>
     <div class="header">
         <h1><i class="fas fa-heartbeat"></i> Health Calculators</h1>
-        <p>Calculate your BMI, Age, Calories, and Body Fat Percentage</p>
+        <p>Calculate your BMI, Age, Calories, Body Fat and BMR Percentage</p>
     </div>
 
     <div class="tabs">
         <div class="tab active" data-tab="bmi">
             <i class="fas fa-weight-scale"></i> BMI
         </div>
+
+<div class="tabs">
+        <div class="tab active" data-tab="BMR">
+            <i class="fas fa-weight-scale"></i> BMR
+        </div>
+
+
+
+        
         <div class="tab" data-tab="age">
             <i class="fas fa-birthday-cake"></i> Age
         </div>
@@ -452,6 +461,47 @@
                 <div class="result-details" id="calories-details"></div>
             </div>
         </div>
+
+        <!-- ||||||||||||||| COPY FROM HERE ||||||||||||||| -->
+<!-- BMR Calculator -->
+<div id="bmr-calc" class="calc-content">
+    <h2>BMR Calculator</h2>
+    <p>Calculate your Basal Metabolic Rate (BMR) to understand how many calories your body needs at rest.</p>
+
+    <div class="input-group">
+        <label for="bmr-age">Age</label>
+        <input type="number" id="bmr-age" min="15" max="80" required placeholder="Your age in years">
+    </div>
+
+    <div class="input-group">
+        <label for="bmr-gender">Gender</label>
+        <select id="bmr-gender" required>
+            <option value="" disabled selected>Select your gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="bmr-height">Height (cm)</label>
+        <input type="number" id="bmr-height" min="100" max="250" required placeholder="Height in centimeters">
+    </div>
+
+    <div class="input-group">
+        <label for="bmr-weight">Weight (kg)</label>
+        <input type="number" id="bmr-weight" min="30" max="200" required placeholder="Weight in kilograms">
+    </div>
+
+    <button class="calculate-btn" onclick="calculateBMR()">Calculate My BMR</button>
+
+    <div id="bmr-result" class="result-box" style="display: none;">
+        <h3>Your Results</h3>
+        <p>Your Basal Metabolic Rate (BMR) is:</p>
+        <p class="result-amount" id="bmr-value"></p>
+        <p>This is the number of calories your body needs to perform basic life-sustaining functions.</p>
+    </div>
+</div>
+<!-- ||||||||||||||| COPY TO HERE ||||||||||||||| -->
 
         <!-- Body Fat Calculator -->
         <div class="calculator" id="fat-calculator">
@@ -710,6 +760,41 @@
             document.getElementById('fat-category').textContent = category;
             document.getElementById('fat-result').classList.add('show');
         }
+
+        // ||||||||||||||| COPY FROM HERE |||||||||||||||
+function calculateBMR() {
+    // Get input values
+    const age = parseInt(document.getElementById('bmr-age').value);
+    const gender = document.getElementById('bmr-gender').value;
+    const height = parseFloat(document.getElementById('bmr-height').value);
+    const weight = parseFloat(document.getElementById('bmr-weight').value);
+
+    // Simple validation
+    if (!age || !gender || !height || !weight) {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+
+    let bmr;
+
+    // Mifflin-St Jeor Formula (most accurate)
+    if (gender === 'male') {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+    } else {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+    }
+
+    // Display the result
+    const resultDiv = document.getElementById('bmr-result');
+    const bmrValueElement = document.getElementById('bmr-value');
+
+    bmrValueElement.textContent = Math.round(bmr) + ' calories per day';
+    resultDiv.style.display = 'block';
+
+    // Scroll to the result
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+// ||||||||||||||| COPY TO HERE ||||||||||||||| |
     </script>
 </body>
 </html>
